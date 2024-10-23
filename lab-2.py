@@ -1,6 +1,5 @@
-from csv import reader
-
 # первое задание
+from csv import reader
 with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
     table = reader(csvfile, delimiter=';')
     quantity=0
@@ -12,6 +11,7 @@ with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
 
 
 #второе задание
+from csv import reader
 with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
     table = reader(csvfile, delimiter=';')
     author_name = input('Введите имя автора для поиска: ')
@@ -29,6 +29,7 @@ with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
 
 
 #третье задание
+from csv import reader
 import random
 
 with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
@@ -42,6 +43,7 @@ with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
     table = reader(csvfile, delimiter=';')
     i=0
     j=0
+
     for row in table:
         i+=1
         if j<20:
@@ -51,52 +53,53 @@ with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
 output.close()
 
 #четвертое задание
-# import xml.dom.minidom as minidom
+# from xml.dom import minidom
 
-# with open('currency.xml', 'r', encoding='latin-1') as xml_file:
-#     xml_data = xml_file.read()
-# xml_file = open('currency.xml', 'r')
-# xml_data = xml_file.read()
+# file_path = 'currency.xml'
+# currency_dict = {}
+# doc = minidom.parse(file_path)
+# currencies = doc.getElementsByTagName('Currency')
 
-    # dom = minidom.parseString(xml_data)
-    # dom.normalize()
+# for currency in currencies:
+#     name = currency.getElementsByTagName('Name')[0].firstChild.data
+#     char_code = currency.getElementsByTagName('CharCode')[0].firstChild.data
+#     currency_dict[name] = char_code
 
-    # elements = dom.getElementsByTagName('book')
-    # books_dict = {}
+# print(currency_dict)
 
-    # for node in elements:
-    #     for child in node.childNodes:
-    #         if child.nodeType == 1:
-    #             if child.tagName == 'Name':
-    #                 if child.firstChild.nodeType == 3:
-    #                     title = child.firstChild.data
-    #             if child.tagName == 'CharCode':
-    #                 if child.firstChild.nodeType == 3:
-    #                     price = float(child.firstChild.data)
-    #     books_dict[title] = price
 
-    #     if node.getAttribute('id') == 'bk106':
-    #         print(node.getElementsByTagName('Name')[0].firstChild.data)
-
-    # for currency in elements:
-    #     name = currency.getElementsByTagName('Name')[0].firstChild.nodeValue
-    #     char_code = currency.getElementsByTagName('CharCode')[0].firstChild.nodeValue
-    #     books_dict[name] = char_code
-    # print(books_dict)
-    
 #допзадание №1
+from csv import reader
 
 with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
     table = reader(csvfile, delimiter=';')
     publisher=set()
+
     for row in table:
         publisher.add(f'{row[4]}')
+
     publisher=sorted(publisher)
+
     for i in range (len(publisher)):
         print(publisher[i]+'\n')
 
+
 #допзадание №2
-# with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
-#     table = reader(csvfile, delimiter=';')
-#     top_books=[]
+from csv import reader
+with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
+    table = reader(csvfile, delimiter=';')
+    top_books=[]
+    i=0
     
+    for row in table:
+        i+=1
+        if i!=1:
+            book = row[1]
+            author=row[2]
+            popularity = int(row[5])
+            top_books.append((popularity, book, author))
+
+top_books=sorted(top_books)[::-1]
+
+for i in range (20):
+    print(str(i+1)+'.' + '\t' + str(top_books[i][2])+ ' - ' + str(top_books[i][1])+'\n')
