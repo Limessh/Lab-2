@@ -53,35 +53,46 @@ with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
 output.close()
 
 #четвертое задание
-# from xml.dom import minidom
+import xml.dom.minidom as minidom
 
-# file_path = 'currency.xml'
-# currency_dict = {}
-# doc = minidom.parse(file_path)
-# currencies = doc.getElementsByTagName('Currency')
+xml_file = open('currency.xml', 'r', encoding='latin-1')
+xml_data = xml_file.read()
 
-# for currency in currencies:
-#     name = currency.getElementsByTagName('Name')[0].firstChild.data
-#     char_code = currency.getElementsByTagName('CharCode')[0].firstChild.data
-#     currency_dict[name] = char_code
+dom = minidom.parseString(xml_data)
+dom.normalize()
 
-# print(currency_dict)
+elements = dom.getElementsByTagName('Valute')
+books_dict = {}
 
+for node in elements:
+    for child in node.childNodes:
+        if child.nodeType == 1:
+            if child.tagName == 'Name':
+                if child.firstChild.nodeType == 3:
+                    name = child.firstChild.data
+            if child.tagName == 'CharCode':
+                if child.firstChild.nodeType == 3:
+                    charcode = str (child.firstChild.data)
+    books_dict[name]=charcode
+
+print(books_dict)
+
+xml_file.close()
 
 #допзадание №1
-from csv import reader
+# from csv import reader
 
-with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
-    table = reader(csvfile, delimiter=';')
-    publisher=set()
+# with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
+#     table = reader(csvfile, delimiter=';')
+#     publisher=set()
 
-    for row in table:
-        publisher.add(f'{row[4]}')
+#     for row in table:
+#         publisher.add(f'{row[4]}')
 
-    publisher=sorted(publisher)
+#     publisher=sorted(publisher)
 
-    for i in range (len(publisher)):
-        print(publisher[i]+'\n')
+#     for i in range (len(publisher)):
+#         print(publisher[i]+'\n')
 
 
 #допзадание №2
