@@ -80,19 +80,19 @@ print(books_dict)
 xml_file.close()
 
 #допзадание №1
-# from csv import reader
+from csv import reader
 
-# with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
-#     table = reader(csvfile, delimiter=';')
-#     publisher=set()
+with open('books-en.csv', 'r', encoding='windows-1251') as csvfile:
+    table = reader(csvfile, delimiter=';')
+    publisher=set()
 
-#     for row in table:
-#         publisher.add(f'{row[4]}')
+    for row in table:
+        publisher.add(f'{row[4]}')
 
-#     publisher=sorted(publisher)
+    publisher=sorted(publisher)
 
-#     for i in range (len(publisher)):
-#         print(publisher[i]+'\n')
+    for i in range (len(publisher)):
+        print(publisher[i]+'\n')
 
 
 #допзадание №2
